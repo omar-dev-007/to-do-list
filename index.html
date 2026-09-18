@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>My to do list</h1>
+        
+        <section class="counter">
+            <button id="totalTasks"></button>
+            <button id="complete"></button>
+            <button id="incomplete"></button>
+        </section>
+
+        <input id="task" placeholder="What needs to be done?" type="text">
+        <p id="inputError"></p>
+        
+        <div class="controls-row">
+            <button id="addButton">Add Task</button>
+            <button id="clearAllButton">Clear All</button>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="Search tasks...">
+        
+        <ul id="taskList"></ul>
+    </div>
+
+    <!-- Modals Body Ke Direct Child Hain -->
+    <div id="editModal" style="display: none;">
+        <div class="modal-content">
+            <h3>Edit Task</h3>
+            <input type="text" id="editTaskInput">
+            <p id="editError"></p>
+            <div class="modal-buttons">
+                <button id="cancelEditButton">Cancel</button>
+                <button id="saveEditButton">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="clearConfirmModal" style="display: none;">
+        <div class="modal-content">
+            <h3>Are you sure?</h3>
+            <p>This will delete all tasks permanently.</p>
+            <div class="modal-buttons">
+                <button id="cancelClearAll">Cancel</button>
+                <button id="confirmClearAll">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

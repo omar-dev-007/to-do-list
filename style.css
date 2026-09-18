@@ -1,0 +1,312 @@
+/* ==========================================
+   1. GENERAL STYLES & RESET
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    background-image: radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+                      radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    color: #f8fafc;
+}
+
+.app-container {
+    max-width: 520px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+/* ==========================================
+   2. COUNTER & FILTER BUTTONS
+   ========================================== */
+.counter {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.counter button {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+}
+
+.counter button:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(51, 65, 85, 0.8);
+}
+
+.counter button.active-filter {
+    border: 2px solid #38bdf8 !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.4) !important;
+    transform: translateY(-2px);
+}
+
+#totalTasks { color: #38bdf8; }
+#complete { color: #34d399; }
+#incomplete { color: #fbbf24; }
+
+/* ==========================================
+   3. INPUT FIELDS & CONTROL BUTTONS
+   ========================================== */
+#task, #searchInput {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #1e293b;
+    color: #f8fafc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 6px;
+}
+
+#task::placeholder, #searchInput::placeholder {
+    color: #64748b;
+}
+
+#task:focus, #searchInput:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+#searchInput {
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+#inputError, #editError {
+    color: #f87171;
+    font-size: 0.85rem;
+    font-weight: 500;
+    min-height: 20px;
+    margin-bottom: 8px;
+    padding-left: 2px;
+}
+
+.controls-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+#addButton, #clearAllButton {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#addButton {
+    background-color: #06b6d4;
+    color: #0f172a;
+}
+
+#addButton:hover {
+    background-color: #22d3ee;
+}
+
+#clearAllButton {
+    background-color: transparent;
+    color: #94a3b8;
+    border: 1px solid #334155;
+}
+
+#clearAllButton:hover {
+    background-color: #1e293b;
+    color: #f8fafc;
+}
+
+/* ==========================================
+   4. TASK LIST & ITEMS
+   ========================================== */
+#taskList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#taskList li {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+#taskList li:hover {
+    background: rgba(51, 65, 85, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+#taskList li input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #06b6d4;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+#taskList li span {
+    flex: 1;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    word-break: break-word;
+}
+
+#taskList li input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #64748b;
+}
+
+#taskList li button {
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 6px;
+    transition: all 0.2s;
+}
+
+#taskList li button:nth-of-type(1) {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    border-color: rgba(56, 189, 248, 0.2);
+}
+
+#taskList li button:nth-of-type(1):hover {
+    background-color: rgba(56, 189, 248, 0.25);
+}
+
+#taskList li button:nth-of-type(2) {
+    background-color: rgba(248, 113, 113, 0.1);
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.2);
+}
+
+#taskList li button:nth-of-type(2):hover {
+    background-color: rgba(248, 113, 113, 0.25);
+}
+
+/* ==========================================
+   5. POPUP MODALS OVERLAY (FIXED DISPLAY)
+   ========================================== */
+#editModal, #clearConfirmModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999999;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hidden Class to properly hide modals */
+.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 24px;
+    width: 90%;
+    max-width: 360px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: #f8fafc;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.modal-content p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.modal-content input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.modal-buttons button:hover {
+    opacity: 0.9;
+}
+
+#cancelEditButton, #cancelClearAll {
+    background-color: #334155;
+    color: #cbd5e1;
+}
+
+#saveEditButton {
+    background-color: #10b981;
+    color: #0f172a;
+}
+
+#confirmClearAll {
+    background-color: #ef4444;
+    color: #ffffff;
+}
